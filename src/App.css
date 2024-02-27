@@ -1,0 +1,58 @@
+body{
+    font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+main{
+    padding: 10px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+img{
+    width: 100%;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+header a{
+    text-decoration: none;
+    color: inherit;
+}
+header a .logo{
+    font-weight: bold;
+}
+header nav{
+    display: flex;
+    gap: 15px;
+}
+.post{
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+    gap: 30px;
+}
+.post .image{
+    width: 90%;
+}
+.post .texts h2{
+    margin: 0;
+    font-size: 1.6rem;
+}
+.post .info{
+    margin: 6px 0;
+    color: #888;
+    font-size: .7rem;
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+}
+.info .author{
+    color: #333;
+}
+.post .summary{
+    margin: 10px 0;
+    line-height: 1.4rem;
+}
