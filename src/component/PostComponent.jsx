@@ -5,7 +5,7 @@ export const Post = () => {
   return (
     <div className="post">
       <div className="image">
-        <img src={car} alt="lamborghini" srcset="" />
+        <img src={car} alt="lamborghini" srcSet="" />
       </div>
       <div className="texts">
         <h2>

@@ -1,7 +1,7 @@
 import "./App.css";
-import { Header } from "./component/Header";
+import { Header } from "./component/HeaderComponent";
 import { Layout } from "./component/Layout";
-import { Post } from "./component/Post";
+import { Post } from "./component/PostComponent";
 import { Routes, Route } from "react-router-dom";
 import { IndexPage } from "./pages/IndexPage";
 import { LoginPage } from "./pages/LoginPage";

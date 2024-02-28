@@ -1,5 +1,5 @@
 import React from "react";
-import { Post } from "../component/Post";
+import { Post } from "../component/PostComponent";
 
 export const IndexPage = () => {
   return (
