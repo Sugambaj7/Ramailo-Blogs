@@ -1,29 +1,26 @@
 import React from "react";
 import car from "../images/car.jpg";
+import { formatISO9075 } from "date-fns";
 
-export const Post = () => {
+export const Post = ({ title, summary, cover, content, createdAt, author }) => {
   return (
     <div className="post">
-      <div className="image">
-        <img src={car} alt="lamborghini" srcSet="" />
+      <div className="image bg-red-500">
+        <img
+          src={"http://localhost:4001/" + cover}
+          alt="lamborghini"
+          srcSet=""
+        />
       </div>
       <div className="texts">
-        <h2>
-          Exclusive! Lamborghini Urus Hybrid to get over 30 miles of electric
-          range
-        </h2>
+        <h2>{title}</h2>
         <p className="info">
           <a href="" className="author">
-            Sugam Bajracharya
+            {author.username}
           </a>
-          <time>2024-2-27 12:23</time>
+          <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summary">
-          The Lamborghini Urus, the most popular model in the brand’s line-up,
-          will soon get a plug-in hybrid powertrain. The Urus Hybrid is said to
-          be in its final stages of development and is expected to debut before
-          the end of this year.
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );
