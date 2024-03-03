@@ -12,7 +12,9 @@ export const IndexPage = () => {
   }, []);
   return (
     <>
-      <div>{posts.length > 0 && posts.map((post) => <Post {...post} />)}</div>
+      <div className="grid grid-col-1">
+        {posts.length > 0 && posts.map((post) => <Post {...post} />)}
+      </div>
     </>
   );
 };

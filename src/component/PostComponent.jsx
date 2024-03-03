@@ -1,19 +1,30 @@
 import React from "react";
 import car from "../images/car.jpg";
 import { formatISO9075 } from "date-fns";
+import { Link } from "react-router-dom";
 
-export const Post = ({ title, summary, cover, content, createdAt, author }) => {
+export const Post = ({
+  _id,
+  title,
+  summary,
+  cover,
+  content,
+  createdAt,
+  author,
+}) => {
   return (
     <div className="post">
-      <div className="image bg-red-500">
-        <img
-          src={"http://localhost:4001/" + cover}
-          alt="lamborghini"
-          srcSet=""
-        />
+      <div className="image mt-0 ">
+        <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4001/" + cover} alt="image" srcSet="" />
+        </Link>
       </div>
-      <div className="texts">
-        <h2>{title}</h2>
+      <div className="texts mt-0 ml-3 ">
+        <div>
+          <Link to={`/post/${_id}`}>
+            <h2>{title}</h2>
+          </Link>
+        </div>
         <p className="info">
           <a href="" className="author">
             {author.username}

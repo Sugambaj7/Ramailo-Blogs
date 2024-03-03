@@ -36,10 +36,14 @@
         gap: 15px;
     }
     .post{
-        display: flex;
-        flex-direction: row;
-        margin-top: 16px;
-        gap: 30px;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    @media screen and (min-width: 600px){
+        .post{
+            grid-template-columns: 1.8fr 1.1fr;
+        }
     }
     .post .image{
         width: 90%;
