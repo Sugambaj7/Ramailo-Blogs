@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Editor } from "../component/Editor";
+import { UserContext } from "../UserContext";
 
 const modules = {
   toolbar: [
@@ -33,6 +33,7 @@ const formats = [
 ];
 
 export const CreatePost = () => {
+  const { setUserInfo, userInfo } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
@@ -60,32 +61,37 @@ export const CreatePost = () => {
   if (redirect) {
     return <Navigate to="/" />;
   }
+  if (userInfo == null) {
+    return <Navigate to="/" />;
+  }
 
   return (
-    <form action="" className="flex flex-col space-y-4" onSubmit={CreatePost}>
-      <div className="flex flex-col">
-        <input
-          type="title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          placeholder={"Title"}
-          className="p-2 border rounded mb-1"
-        />
-        <input
-          type="summary"
-          value={summary}
-          onChange={(event) => setSummary(event.target.value)}
-          placeholder={"Summary"}
-          className="p-2 border rounded mb-1"
-        />
-        <input
-          type="file"
-          onChange={(event) => setFiles(event.target.files)}
-          className="p-2 border rounded mb-1"
-        />
-        <Editor onChange={setContent} value={content} />
-        <button style={{ marginTop: "5px" }}>Create Post</button>
-      </div>
-    </form>
+    <>
+      <form action="" className="flex flex-col space-y-4" onSubmit={CreatePost}>
+        <div className="flex flex-col">
+          <input
+            type="title"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            placeholder={"Title"}
+            className="p-2 border rounded mb-1"
+          />
+          <input
+            type="summary"
+            value={summary}
+            onChange={(event) => setSummary(event.target.value)}
+            placeholder={"Summary"}
+            className="p-2 border rounded mb-1"
+          />
+          <input
+            type="file"
+            onChange={(event) => setFiles(event.target.files)}
+            className="p-2 border rounded mb-1"
+          />
+          <Editor onChange={setContent} value={content} />
+          <button style={{ marginTop: "5px" }}>Create Post</button>
+        </div>
+      </form>
+    </>
   );
 };

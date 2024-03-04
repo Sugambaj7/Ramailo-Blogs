@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
 import { Editor } from "../component/Editor";
 import { useParams, Navigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 export const EditPost = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ export const EditPost = () => {
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetch("http://localhost:4001/post/" + id).then((response) => {
@@ -43,6 +45,9 @@ export const EditPost = () => {
 
   if (redirect) {
     return <Navigate to={"/post/" + id} />;
+  }
+  if (userInfo == null) {
+    return <Navigate to="/" />;
   }
 
   return (
