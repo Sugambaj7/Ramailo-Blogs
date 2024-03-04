@@ -1,54 +1,38 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { Editor } from "../component/Editor";
+import { useParams, Navigate } from "react-router-dom";
 
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image"],
-    ["clean"],
-  ],
-};
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
-
-export const CreatePost = () => {
+export const EditPost = () => {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  async function CreatePost(event) {
+  useEffect(() => {
+    fetch("http://localhost:4001/post/" + id).then((response) => {
+      response.json().then((postInfo) => {
+        setTitle(postInfo.title);
+        setSummary(postInfo.summary);
+        setContent(postInfo.content);
+      });
+    });
+  }, []);
+  async function updatePost(event) {
+    event.preventDefault();
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set("file", files[0]);
-    event.preventDefault();
-    console.log(files);
+    data.set("id", id);
+    if (files?.[0]) {
+      data.set("file", files?.[0]);
+    }
+    data.set("file", files?.[0]);
     const response = await fetch("http://localhost:4001/post", {
-      method: "POST",
+      method: "PUT",
       body: data,
       credentials: "include",
     });
@@ -58,11 +42,11 @@ export const CreatePost = () => {
   }
 
   if (redirect) {
-    return <Navigate to="/" />;
+    return <Navigate to={"/post/" + id} />;
   }
 
   return (
-    <form action="" className="flex flex-col space-y-4" onSubmit={CreatePost}>
+    <form action="" className="flex flex-col space-y-4" onSubmit={updatePost}>
       <div className="flex flex-col">
         <input
           type="title"
@@ -83,8 +67,9 @@ export const CreatePost = () => {
           onChange={(event) => setFiles(event.target.files)}
           className="p-2 border rounded mb-1"
         />
+
         <Editor onChange={setContent} value={content} />
-        <button style={{ marginTop: "5px" }}>Create Post</button>
+        <button style={{ marginTop: "5px" }}>Update Post</button>
       </div>
     </form>
   );

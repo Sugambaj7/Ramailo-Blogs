@@ -107,4 +107,17 @@
         margin-bottom: 1rem;
         font-weight: 400;
     }
+    .edit-row{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .edit-btn{
+        background-color: #333;
+        display: inline-block;
+        color: #fff;
+        padding: 5px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+
+    }
   }
