@@ -4,16 +4,13 @@ import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import image from "../images/blog.png";
 import { Button, Checkbox, Form, Input } from "antd";
-import { AndDesign } from "../component/AndDesign";
 
 export const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const { setUserInfo } = useContext(UserContext);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    login(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -26,17 +23,18 @@ export const LoginPage = () => {
     };
   }, []);
 
-  async function login(event) {
-    event.preventDefault();
+  async function login(data) {
+    // console.log("Login:", data);
     const response = await fetch("http://localhost:4001/login", {
       method: "POST",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
     if (response.ok) {
       response.json().then((userInfo) => {
+        console.log(userInfo, "here");
         setUserInfo(userInfo);
         setRedirect(true);
       });
@@ -76,9 +74,10 @@ export const LoginPage = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
-                className="login pl-8 pr-8"
+                className="login pl-8 pr-16"
+                // onSubmit={login}
               >
-                <h1>Login</h1>
+                <h1 className="pl-20">Login</h1>
                 <Form.Item
                   label="Username"
                   name="username"
@@ -103,17 +102,6 @@ export const LoginPage = () => {
                   ]}
                 >
                   <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                  name="remember"
-                  valuePropName="checked"
-                  wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                  }}
-                >
-                  <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
                 <Form.Item
