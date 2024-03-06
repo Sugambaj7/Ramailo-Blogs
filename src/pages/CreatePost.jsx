@@ -55,6 +55,8 @@ export const CreatePost = () => {
     });
     if (response.ok) {
       setRedirect(true);
+    } else {
+      alert("You have to provide all the fields!!!");
     }
   }
 
