@@ -34,7 +34,7 @@ export const LoginPage = () => {
 
     if (response.ok) {
       response.json().then((userInfo) => {
-        console.log(userInfo, "here");
+        // console.log(userInfo, "here");
         setUserInfo(userInfo);
         setRedirect(true);
       });
@@ -79,12 +79,12 @@ export const LoginPage = () => {
               >
                 <h1 className="pl-20">Login</h1>
                 <Form.Item
-                  label="Username"
-                  name="username"
+                  label="Email"
+                  name="email"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your username!",
+                      message: "Please input your email address!",
                     },
                   ]}
                 >

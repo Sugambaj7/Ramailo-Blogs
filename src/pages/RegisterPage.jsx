@@ -1,15 +1,17 @@
 import { React, useState, useEffect } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox } from "antd";
+import { Alert, Form, Input, Typography } from "antd";
 import { Link } from "react-router-dom";
 import image from "../images/blog.png";
 import "../App.css";
 
 export const RegisterPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    Register(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -22,12 +24,10 @@ export const RegisterPage = () => {
     };
   }, []);
 
-  async function Register(event) {
-    event.preventDefault();
-
+  async function Register(data) {
     const response = await fetch("http://localhost:4001/register", {
       method: "POST",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     });
 
@@ -179,7 +179,8 @@ export const RegisterPage = () => {
             <div className=" flex-1"></div>
             <div className="flex-1">
               <Form
-                name="basic"
+                name="dependencies"
+                form={form}
                 labelCol={{
                   span: 8,
                 }}
@@ -239,28 +240,40 @@ export const RegisterPage = () => {
 
                 <Form.Item
                   label="Password"
-                  name="password"
+                  name="Password"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your password!",
                     },
                   ]}
                 >
-                  <Input.Password />
+                  <Input />
                 </Form.Item>
 
+                {/* Field */}
                 <Form.Item
                   label="Confirm Password"
-                  name="conf-psw"
+                  name="Password2"
+                  dependencies={["Password"]}
                   rules={[
                     {
                       required: true,
-                      message: "Please re-type your password!",
                     },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("Password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "The new password that you entered do not match!"
+                          )
+                        );
+                      },
+                    }),
                   ]}
                 >
-                  <Input.Password />
+                  <Input />
                 </Form.Item>
 
                 <Form.Item

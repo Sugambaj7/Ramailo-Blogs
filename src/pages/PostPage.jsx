@@ -25,7 +25,7 @@ export const PostPage = () => {
           <p>{formatISO9075(new Date(postInfo.createdAt))}</p>
         </time>
         <div className="author mb-3">
-          <p className="text-center">By: @{postInfo.author.username}</p>
+          <p className="text-center">By: @{postInfo.author.name}</p>
         </div>
         {userInfo && userInfo.id === postInfo.author._id && (
           <div className="edit-row flex justify-center items-center">

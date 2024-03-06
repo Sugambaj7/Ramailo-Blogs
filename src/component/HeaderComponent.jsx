@@ -22,8 +22,8 @@ export const Header = () => {
     });
     setUserInfo(null);
   }
-  // console.log(username, "from user anaksdflaksjdlfka");
-  const username = userInfo?.username;
+  const email = userInfo?.email;
+  // console.log(email, "from ma bata hai");
   return (
     <header>
       <Link to="/">
@@ -31,13 +31,13 @@ export const Header = () => {
       </Link>
 
       <nav>
-        {username && (
+        {email && (
           <>
             <Link to="/create">Create new blog</Link>
             <a onClick={logout}>Logout</a>
           </>
         )}
-        {!username && (
+        {!email && (
           <>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
