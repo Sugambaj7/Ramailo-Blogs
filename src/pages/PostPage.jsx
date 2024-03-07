@@ -18,14 +18,16 @@ export const PostPage = () => {
 
   if (!postInfo) return "";
   return (
-    <div className="post-page">
+    <div className="post-page mt-14 mb-10">
       <div>
-        <h1 className="text-center mt-3 mr-0 mb-1 ">{postInfo.title}</h1>
+        <h1 className="text-center text-xl mt-3 mr-0 mb-1 ">
+          {postInfo.title}
+        </h1>
         <time className="text-center block text-xs text-customgrey">
           <p>{formatISO9075(new Date(postInfo.createdAt))}</p>
         </time>
-        <div className="author mb-3">
-          <p className="text-center">By: @{postInfo.author.name}</p>
+        <div className="author mb-3 mt-2">
+          <p className="text-center text-sm">By: @{postInfo.author.name}</p>
         </div>
         {userInfo && userInfo.id === postInfo.author._id && (
           <div className="edit-row flex justify-center items-center">

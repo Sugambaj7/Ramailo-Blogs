@@ -34,7 +34,9 @@ export const Header = () => {
         {email && (
           <>
             <Link to="/create">Create new blog</Link>
-            <a onClick={logout}>Logout</a>
+            <a className="cursor-pointer" onClick={logout}>
+              Logout
+            </a>
           </>
         )}
         {!email && (
