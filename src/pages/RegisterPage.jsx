@@ -32,10 +32,16 @@ export const RegisterPage = () => {
       headers: { "Content-Type": "application/json" },
     });
     console.log(response);
-    if (response.status === 200) {
+    if (response.ok) {
       alert("register success");
+      window.location.href = "/login";
     } else {
-      alert("register failed");
+      const data = await response.json();
+      if (response.status === 400 && data.exist) {
+        alert(data.exist);
+      } else {
+        alert("register failed");
+      }
     }
   }
 

@@ -7,13 +7,14 @@ export const IndexPage = () => {
     fetch("http://localhost:4001/post").then((response) => {
       response.json().then((posts) => {
         setPosts(posts);
+        console.log(posts, "mero posts");
       });
     });
   }, []);
   return (
     <>
-      <div className="grid grid-col-1">
-        {posts.length > 0 && posts.map((post) => <Post {...post} />)}
+      <div className="flex">
+        <div>{posts.length > 0 && posts.map((post) => <Post {...post} />)}</div>
       </div>
     </>
   );

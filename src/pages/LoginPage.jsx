@@ -35,7 +35,12 @@ export const LoginPage = () => {
     if (response.ok) {
       response.json().then((userInfo) => {
         // console.log(userInfo, "here");
+        localStorage.clear();
+        localStorage.setItem("id", userInfo.id);
+        localStorage.setItem("email", userInfo.email);
+        localStorage.setItem("name", userInfo.name);
         setUserInfo(userInfo);
+        console.log(userInfo, "ma login gare paxi");
         setRedirect(true);
       });
     } else {

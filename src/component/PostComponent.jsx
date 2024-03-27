@@ -5,18 +5,22 @@ import { Link } from "react-router-dom";
 
 export const Post = ({
   _id,
+  authorid,
   title,
   summary,
-  cover,
+  postimage,
   content,
   createdAt,
-  author,
 }) => {
   return (
     <div className="post">
       <div className="image mt-0 ">
         <Link to={`/post/${_id}`}>
-          <img src={"http://localhost:4001/" + cover} alt="image" srcSet="" />
+          <img
+            src={"http://localhost:4001/uploads/postimages/" + postimage}
+            alt="image"
+            srcSet=""
+          />
         </Link>
       </div>
       <div className="texts mt-0 ml-3 ">
@@ -27,7 +31,7 @@ export const Post = ({
         </div>
         <p className="info">
           <a href="" className="author">
-            {author.username}
+            {authorid.name}
           </a>
           <time>{formatISO9075(new Date(createdAt))}</time>
         </p>

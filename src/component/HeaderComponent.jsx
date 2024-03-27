@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 export const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch("http://localhost:4001/profile", {
+    fetch("http://localhost:4001/login/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -16,36 +16,47 @@ export const Header = () => {
   }, []);
 
   function logout() {
-    fetch("http://localhost:4001/logout", {
-      credentials: "include",
-      method: "POST",
-    });
+    // fetch("http://localhost:4001/logout", {
+    //   credentials: "include",
+    //   method: "POST",
+    // });
+    // setUserInfo(null);
+
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.clear();
     setUserInfo(null);
   }
   const email = userInfo?.email;
-  // console.log(email, "from ma bata hai");
   return (
-    <header>
-      <Link to="/">
-        <p className="logo">Ramailo Blogs</p>
-      </Link>
+    <header className="flex items-center ">
+      <div></div>
+      <div className="flex w-[60%] justify-between">
+        <Link to="/">
+          <div>
+            <p className="logo">Ramailo Blogs</p>
+          </div>
+        </Link>
+        <div>
+          <nav>
+            {email && (
+              <>
+                <Link to="/create">Create new blog</Link>
+                <a className="cursor-pointer" onClick={logout}>
+                  Logout
+                </a>
+              </>
+            )}
+            {!email && (
+              <>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+              </>
+            )}
+          </nav>
+        </div>
+      </div>
 
-      <nav>
-        {email && (
-          <>
-            <Link to="/create">Create new blog</Link>
-            <a className="cursor-pointer" onClick={logout}>
-              Logout
-            </a>
-          </>
-        )}
-        {!email && (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        )}
-      </nav>
+      <div></div>
     </header>
   );
 };

@@ -6,11 +6,13 @@ import { UserContext } from "../UserContext";
 export const PostPage = () => {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
+  console.log(userInfo);
   const { id } = useParams();
   useEffect(() => {
     console.log(id);
     fetch(`http://localhost:4001/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
+        // console.log(postInfo, "yei ho");
         setPostInfo(postInfo);
       });
     });
@@ -18,7 +20,7 @@ export const PostPage = () => {
 
   if (!postInfo) return "";
   return (
-    <div className="post-page mt-14 mb-10">
+    <div className="post-page mb-10">
       <div>
         <h1 className="text-center text-xl mt-3 mr-0 mb-1 ">
           {postInfo.title}
@@ -27,13 +29,13 @@ export const PostPage = () => {
           <p>{formatISO9075(new Date(postInfo.createdAt))}</p>
         </time>
         <div className="author mb-3 mt-2">
-          <p className="text-center text-sm">By: @{postInfo.author.name}</p>
+          <p className="text-center text-sm">By: @{postInfo.authorid.name}</p>
         </div>
-        {userInfo && userInfo.id === postInfo.author._id && (
+        {userInfo && userInfo.id === postInfo.authorid._id && (
           <div className="edit-row flex justify-center items-center">
             <div>
               <Link
-                to={`/edit/${postInfo._id}`}
+                to={`/post/edit/${postInfo._id}`}
                 className="edit-btn flex gap-1"
               >
                 <svg
@@ -55,7 +57,7 @@ export const PostPage = () => {
             </div>
             <div className="ml-2">
               <Link
-                to={`/delete/${postInfo._id}`}
+                to={`/post/delete/${postInfo._id}`}
                 className="delete-btn flex gap-1"
               >
                 <svg
@@ -79,7 +81,10 @@ export const PostPage = () => {
         )}
       </div>
       <div className="image mb-3">
-        <img src={`http://localhost:4001/${postInfo.cover}`} alt="" />
+        <img
+          src={`http://localhost:4001/uploads/postimages/${postInfo.postimage}`}
+          alt=""
+        />
       </div>
       <div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
     </div>
