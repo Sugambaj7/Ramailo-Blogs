@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useContext, useEffect } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
@@ -6,6 +6,7 @@ import { UserContext } from "../UserContext";
 export const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
+    //login xa ki chaina check(authentication)
     fetch("http://localhost:4001/login/profile", {
       credentials: "include",
     }).then((response) => {
@@ -26,7 +27,10 @@ export const Header = () => {
     localStorage.clear();
     setUserInfo(null);
   }
+  console.log(userInfo, "header ko userInfo");
   const email = userInfo?.email;
+  const role = userInfo?.role;
+
   return (
     <header className="flex items-center ">
       <div></div>
@@ -38,7 +42,7 @@ export const Header = () => {
         </Link>
         <div>
           <nav>
-            {email && (
+            {email && role !== "admin" && (
               <>
                 <Link to="/create">Create new blog</Link>
                 <a className="cursor-pointer" onClick={logout}>
@@ -50,6 +54,14 @@ export const Header = () => {
               <>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
+              </>
+            )}
+            {email && role == "admin" && (
+              <>
+                <Link to="/dashboard">Dashboard</Link>
+                <a className="cursor-pointer" onClick={logout}>
+                  Logout
+                </a>
               </>
             )}
           </nav>

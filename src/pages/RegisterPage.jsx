@@ -37,7 +37,9 @@ export const RegisterPage = () => {
       window.location.href = "/login";
     } else {
       const data = await response.json();
-      if (response.status === 400 && data.exist) {
+      if (response.status === 400 && data.adminexist) {
+        alert(data.adminexist);
+      } else if (response.status === 400 && data.exist) {
         alert(data.exist);
       } else {
         alert("register failed");

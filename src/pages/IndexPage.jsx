@@ -11,6 +11,7 @@ export const IndexPage = () => {
       });
     });
   }, []);
+
   return (
     <>
       <div className="flex">

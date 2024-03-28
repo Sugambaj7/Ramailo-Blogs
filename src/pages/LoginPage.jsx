@@ -38,6 +38,7 @@ export const LoginPage = () => {
         localStorage.clear();
         localStorage.setItem("id", userInfo.id);
         localStorage.setItem("email", userInfo.email);
+        localStorage.setItem("role", userInfo.role);
         localStorage.setItem("name", userInfo.name);
         setUserInfo(userInfo);
         console.log(userInfo, "ma login gare paxi");
@@ -48,7 +49,9 @@ export const LoginPage = () => {
     }
   }
 
-  if (redirect) {
+  if (redirect && localStorage.getItem("role") === "user") {
+    return <Navigate to="/" />;
+  } else if (redirect && localStorage.getItem("role") === "admin") {
     return <Navigate to="/" />;
   }
   return (
