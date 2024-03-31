@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "./listItems";
 import { Outlet } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -111,13 +111,15 @@ export default function AdminDashboardSideNav() {
             }}
           >
             <div className="text-white">
-              <Typography
-                variant="h6"
-                color="initial"
-                sx={{ paddingLeft: "30px" }}
-              >
-                Ramailo Blogs
-              </Typography>
+              <Link to="/dashboard">
+                <Typography
+                  variant="h6"
+                  color="initial"
+                  sx={{ paddingLeft: "30px" }}
+                >
+                  Ramailo Blogs
+                </Typography>
+              </Link>
             </div>
             <div>
               <IconButton onClick={toggleDrawer}>

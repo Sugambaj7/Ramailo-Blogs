@@ -5,11 +5,13 @@ import ListItemText from "@mui/material/ListItemText";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function logout() {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   localStorage.clear();
+  alert("Successfully logged out!!!");
+  window.location.href = "/";
 }
 
 export const mainListItems = (

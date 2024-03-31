@@ -52,6 +52,7 @@ const rows = [
   },
 ];
 
+
 export default function UsersComponent() {
   return (
     <>
@@ -60,7 +61,7 @@ export default function UsersComponent() {
       </div>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
-          sx={{ margin: 1}} 
+          sx={{ margin: 1}}
           rows={rows}
           columns={columns}
           initialState={{
