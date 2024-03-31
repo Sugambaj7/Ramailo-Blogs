@@ -1,9 +1,8 @@
-import { React, useState, useEffect } from "react";
-import { Button, Checkbox } from "antd";
-import { Alert, Form, Input, Typography } from "antd";
+import { React, useEffect } from "react";
+import { Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import { registerSchema } from "../../../api/models/Validation";
+import { registerSchema } from "../../api/models/Validation";
 import image from "../images/blog.png";
 import "../App.css";
 

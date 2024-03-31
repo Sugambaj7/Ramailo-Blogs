@@ -1,5 +1,4 @@
-import { useContext, React } from "react";
-import car from "../images/car.jpg";
+import { React } from "react";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
 

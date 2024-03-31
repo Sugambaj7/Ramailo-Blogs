@@ -27,23 +27,15 @@ class PostController {
     //   res.status(400).json(e);
     // }
     const postDoc = await Post.find()
-    .populate("authorid", ["name"])
-    .sort({ createdAt: -1 })
-    .limit(20);
+      .populate("authorid", ["name"])
+      .sort({ createdAt: -1 })
+      .limit(20);
     var count = postDoc.length;
 
-    if(!postDoc){
-      return errorResponse(res, 204, 'No posts found')
-    }
-    else{
-      return successResponse(
-        res,
-        200,
-        'message',
-        postDoc,
-        count,
-      )
-    
+    if (!postDoc) {
+      return errorResponse(res, 204, "No posts found");
+    } else {
+      return successResponse(res, 200, "message", postDoc, count);
     }
   }
   async updatePost(req, res) {

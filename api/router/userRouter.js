@@ -5,5 +5,6 @@ const userRouter = express.Router();
 const userInstance = new UserController();
 
 userRouter.get("/", userInstance.getUser);
+userRouter.delete("/:id", userInstance.deleteUser);
 
 module.exports = userRouter;

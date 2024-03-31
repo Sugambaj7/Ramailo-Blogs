@@ -21,7 +21,7 @@ export default function UsersDiv() {
       </Typography>
       <div>
         <Typography color="initial" sx={{ fontSize: "30px", marginTop:"20px" }}>
-          {numUsers}
+          {numUsers? numUsers : 0}
         </Typography>
       </div>
     </div>

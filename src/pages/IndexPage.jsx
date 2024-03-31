@@ -6,7 +6,7 @@ export const IndexPage = () => {
   useEffect(() => {
     fetch("http://localhost:4001/post").then((response) => {
       response.json().then((posts) => {
-        setPosts(posts);
+        setPosts(posts.data);
         console.log(posts, "mero posts");
       });
     });

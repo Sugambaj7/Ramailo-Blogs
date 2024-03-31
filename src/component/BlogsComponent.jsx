@@ -71,6 +71,11 @@ const rows = [
 ];
 
 export default function BlogsComponent() {
+  // useEffect(() =>{
+  //   fetch("http://localhost:4001/post").then((response) => {
+  //     response.json().then((BlogsInfo))
+  //   } )
+  // },[])
   return (
     <div style={{ height: 400, width: "100%" }}>
       <div className="m-4">

@@ -19,8 +19,11 @@ export default function BlogsDiv() {
         No. of Blogs
       </Typography>
       <div>
-        <Typography color="initial" sx={{ fontSize: "30px", marginTop:"20px" }}>
-          {blogNumber}
+        <Typography
+          color="initial"
+          sx={{ fontSize: "30px", marginTop: "20px" }}
+        >
+          {blogNumber ? blogNumber : 0}
         </Typography>
       </div>
     </div>

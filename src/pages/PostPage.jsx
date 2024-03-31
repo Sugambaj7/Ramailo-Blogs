@@ -18,7 +18,6 @@ export const PostPage = () => {
     });
   }, []);
 
-
   if (!postInfo) return "";
   return (
     <div className="post-page mb-10">
