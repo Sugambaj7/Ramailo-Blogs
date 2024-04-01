@@ -64,16 +64,31 @@ class PostController {
     }
   }
   async deletePost(req, res) {
-    // console.log(req.body, "hello");
-    const { id } = req.body;
-    const postDoc = await Post.findById(id);
-    if (!postDoc) {
-      return res.status(400).json("No data");
-    } else {
-      await postDoc.deleteOne({
-        id,
-      });
-      res.json("ok");
+    let id = req.body.id;
+    if (id == null) {
+      id = req.params.id;
+    }
+
+    try {
+      const postDoc = await Post.findById(id);
+      if (!postDoc) {
+        return errorResponse(res, 204, "No Posts found");
+      } else {
+        const deleteStatus = await postDoc.deleteOne({
+          id,
+        });
+        if (deleteStatus.deletedCount > 0) {
+          return successResponse(
+            res,
+            200,
+            "Post has been successfully deleted"
+          );
+        } else {
+          return errorResponse(res, 204, "No posts found");
+        }
+      }
+    } catch (err) {
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
   async store(req, res) {

@@ -13,7 +13,6 @@ class UserController {
     } else {
       return successResponse(res, 200, "message", users, count);
     }
-    // res.status(200).json(users);
   }
   async deleteUser(req, res) {
     const id = req.params.id;

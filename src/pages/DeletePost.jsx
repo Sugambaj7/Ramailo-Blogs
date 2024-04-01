@@ -12,7 +12,7 @@ export const DeletePost = () => {
 
   async function deletePost() {
     const data = { id };
-    const response = await fetch("http://localhost:4001/post", {
+    const response = await fetch("http://localhost:4001/post/test", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

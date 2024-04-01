@@ -13,6 +13,6 @@ postRouter.get("/", postInstance.getPost);
 // postRouter.get("/politics", postInstance.getPolitics);
 postRouter.get("/:id", postInstance.getIndividualPost);
 postRouter.put("/", upload.single("image"), postInstance.updatePost);
-postRouter.delete("/", postInstance.deletePost);
+postRouter.delete("/:id", postInstance.deletePost);
 
 module.exports = postRouter;

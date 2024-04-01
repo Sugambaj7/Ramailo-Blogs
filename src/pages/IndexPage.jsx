@@ -15,7 +15,7 @@ export const IndexPage = () => {
   return (
     <>
       <div className="flex">
-        <div>{posts.length > 0 && posts.map((post) => <Post {...post} />)}</div>
+        <div>{posts.length > 0 ? posts.map((post) => <Post {...post}  />) : "No Blogs till now!!!"}</div>
       </div>
     </>
   );
